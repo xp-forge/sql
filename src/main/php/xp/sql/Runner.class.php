@@ -1,14 +1,11 @@
 <?php namespace xp\sql;
 
-use rdbms\DriverManager;
-use rdbms\SQLException;
-use rdbms\DefaultDrivers;
+use rdbms\{DriverManager, DriverImplementationsProvider, SQLException, DefaultDrivers};
 use util\profiling\Timer;
 use util\cmd\Console;
 use util\Date;
 use io\streams\Streams;
-use lang\XPClass;
-use lang\IllegalArgumentException;
+use lang\{XPClass, IllegalArgumentException};
 
 /**
  * Runs SQL statements
@@ -39,13 +36,8 @@ class Runner {
     ];
   }
 
-  /**
-   * Shows drivers
-   *
-   * @param  rdbms.DriverImplementationsProvider $provider
-   * @return int
-   */
-  private static function drivers($provider) {
+  /** Shows driver */
+  private static function drivers(DriverImplementationsProvider $provider): int {
     Console::writeLine("\e[33m@", typeof($provider)->getClassLoader(), "\e[0m");
     Console::writeLine("\e[1mAvailable drivers via ", nameof($provider), "\e[0m");
     Console::writeLine(str_repeat('═', 72));
@@ -70,25 +62,14 @@ class Runner {
     return 0;
   }
 
-  /**
-   * Starts an interactive SQL shell
-   *
-   * @param  string $dsn
-   * @return int
-   */
-  private static function interactive($dsn) {
+  /** Starts an interactive SQL shell */
+  private static function interactive(string $dsn): int {
     Console::$err->writeLine('Not yet implemented');
     return 255;
   }
 
-  /**
-   * Executes SQL statements; stops on first statement causing an error.
-   *
-   * @param  string $dsn
-   * @param  string[] $statements
-   * @return int
-   */
-  private static function execute($dsn, $statements) {
+  /** Executes SQL statements; stops on first statement causing an error. */
+  private static function execute(string $dsn, array $statements): int {
     $conn= DriverManager::getConnection($dsn);
     $timer= new Timer();
 
@@ -131,13 +112,8 @@ class Runner {
     return 0;
   }
 
-  /**
-   * Runs SQL
-   *
-   * @param  string[] $args
-   * @return int exitcode
-   */
-  public static function main(array $args) {
+  /** Entry point */
+  public static function main(array $args): int {
     switch (sizeof($args)) {
       case 0: return self::drivers(new DefaultDrivers());
       case 1: return self::interactive($args[0]);

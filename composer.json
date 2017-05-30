@@ -1,0 +1,17 @@
+{
+  "name" : "xp-framework/sql",
+  "type" : "project",
+  "homepage" : "http://xp-framework.net/",
+  "license" : "BSD-3-Clause",
+  "description" : "SQL Subcommand",
+  "keywords": ["module", "xp"],
+  "require" : {
+    "xp-framework/core": "^9.0 | ^8.0 | ^7.0",
+    "xp-framework/rdbms": "^10.0 | ^9.0 | ^8.0 | ^7.0",
+    "php" : ">=7.0.0"
+  },
+  "bin": ["bin/xp.xp-forge.sql"],
+  "autoload" : {
+    "files" : ["src/main/php/autoload.php"]
+  }
+}

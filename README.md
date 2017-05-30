@@ -34,9 +34,20 @@ Runs SQL statements
 
   $ cat statement.sql | xp sql 'sqlite://./test.db' -
 
+> Use named connections as configured in connections.ini.
+
+  $ xp sql dev-db 'select * from account where id = 1'
+
+
+The file connections.ini is per-user and can be found in one of:
+
+> %LOCALAPPDATA%/Xp-forge.sql/ on Windows
+> $XDG_CONFIG_HOME/xp-forge.sql/ inside an XDG environment
+> $HOME/.xp-forge.sql/ otherwise
 
 Invoking without arguments shows a list of available drivers.
 ```
+
 *The `-m [vert,csv]` syntax is inspired by SQSH, see http://manpages.ubuntu.com/manpages/precise/man1/sqsh.1.html*
 
 ## Drivers

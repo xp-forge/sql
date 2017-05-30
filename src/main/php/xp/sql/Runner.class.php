@@ -1,11 +1,11 @@
 <?php namespace xp\sql;
 
-use rdbms\{DriverManager, DriverImplementationsProvider, SQLException, DefaultDrivers};
-use util\profiling\Timer;
-use util\cmd\Console;
-use util\Date;
 use io\streams\Streams;
-use lang\{XPClass, IllegalArgumentException};
+use lang\{XPClass, Environment, IllegalArgumentException};
+use rdbms\{DriverManager, DriverImplementationsProvider, SQLException, DefaultDrivers};
+use util\cmd\Console;
+use util\profiling\Timer;
+use util\{Date, Properties};
 
 /**
  * Runs SQL statements
@@ -23,6 +23,16 @@ use lang\{XPClass, IllegalArgumentException};
  *   ```sh
  *   $ cat statement.sql | xp sql 'sqlite://./test.db' -
  *   ```
+ * - Use named connections as configured in `connections.ini`.
+ *   ```sh
+ *   $ xp sql dev-db 'select * from account where id = 1'
+ *   ```
+ *
+ * The file `connections.ini` is per-user and can be found in one of:
+ *
+ * - *%LOCALAPPDATA%/Xp-forge.sql/* on Windows
+ * - *$XDG_CONFIG_HOME/xp-forge.sql/* inside an XDG environment
+ * - *$HOME/.xp-forge.sql/* otherwise
  *
  * Invoking without arguments shows a list of available drivers.
  */
@@ -63,14 +73,14 @@ class Runner {
   }
 
   /** Starts an interactive SQL shell */
-  private static function interactive(string $dsn): int {
+  private static function interactive(Connection $connect): int {
     Console::$err->writeLine('Not yet implemented');
     return 255;
   }
 
   /** Executes SQL statements; stops on first statement causing an error. */
-  private static function execute(string $dsn, array $statements): int {
-    $conn= DriverManager::getConnection($dsn);
+  private static function execute(Connection $connect, array $statements): int {
+    $conn= $connect->establish();
     $timer= new Timer();
 
     foreach ($statements as $statement) {
@@ -114,10 +124,24 @@ class Runner {
 
   /** Entry point */
   public static function main(array $args): int {
+    $config= Environment::configDir('xp-forge.sql');
+    $p= new Properties($config.'connections.ini');
+
+    // Create config file if not existant
+    if (!$p->exists()) {
+      Console::writeLine('Creating configuration file ', $p->getFileName());
+      is_dir($config) || mkdir($config);
+      file_put_contents($p->getFileName(), 
+        "; xp-forge/sql configuration; uses following format\n".
+        ";\n".
+        "; name=\"driver://user:password@host[:port]/database\"\n"
+      );
+    }
+
     switch (sizeof($args)) {
       case 0: return self::drivers(new DefaultDrivers());
-      case 1: return self::interactive($args[0]);
-      default: return self::execute($args[0], array_slice($args, 1));
+      case 1: return self::interactive(Connection::to($args[0], $p));
+      default: return self::execute(Connection::to($args[0], $p), array_slice($args, 1));
     }
   }
 }

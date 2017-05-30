@@ -9,6 +9,12 @@ SQL subcommand
 
 SQL command line tool using XP database drivers.
 
+## Installation
+
+```bash
+$ composer global require xp-forge/sql 'dev-master'
+```
+
 ## Usage
 ```bash
 $ xp help sql

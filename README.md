@@ -1,4 +1,4 @@
-Data sqls
+SQL subcommand
 ==============
 
 [![Build Status on TravisCI](https://secure.travis-ci.org/xp-forge/sql.svg)](http://travis-ci.org/xp-forge/sql)

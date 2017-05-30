@@ -34,26 +34,8 @@ class Runner {
 
   static function __static() {
     self::$display= [
-      'vert' => function($record) {
-        $r= '';
-        foreach ($record as $key => $value) {
-          $r.= $key.': '.\xp::stringOf($value)."\n";
-        }
-        return $r;
-      },
-      'csv'  => function($record) {
-        $r= [];
-        foreach ($record as $value) {
-          if ($value instanceof Date) {
-            $r[]= $value->toString('r');
-          } else if (is_string($value)) {
-            $r[]= '"'.strtr($value, ['"' => '""', "\r" => '', "\n" => '']).'"';
-          } else {
-            $r[]= $value;
-          }
-        }
-        return implode(';', $r);
-      }
+      'vert' => new VerticalDisplay(),
+      'csv'  => new CsvDisplay(';')
     ];
   }
 
@@ -124,6 +106,7 @@ class Runner {
         if (!isset(self::$display[$mode])) {
           throw new IllegalArgumentException('No such display mode "'.$mode.'"');
         }
+        $sql= substr($sql, 0, $p);
       }
 
       try {
@@ -134,7 +117,7 @@ class Runner {
         } else {
           $rows= 0;
           while ($record= $q->next()) {
-            Console::writeLine(self::$display[$mode]($record));
+            Console::writeLine(self::$display[$mode]->render($record));
             $rows++;
           }
           Console::$err->writeLinef('%d row(s) in set (%.2f sec)', $rows, $timer->elapsedTime());

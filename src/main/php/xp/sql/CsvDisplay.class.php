@@ -9,8 +9,10 @@ use util\Date;
  * 1;"Test";2017-05-30 11:16:00+0200
  * ```
  */
-class CsvDisplay implements Display {
+class CsvDisplay extends Display {
   private $separator;
+
+  static function __static() { }
 
   /** Creates a new display with a given separator */
   public function __construct(string $separator= ';') {

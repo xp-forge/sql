@@ -8,15 +8,7 @@ use util\profiling\Timer;
 
 /* Executes SQL statements; stops on first statement causing an error. */
 class Statements implements Command {
-  private static $display;
   private $connection, $statements;
-
-  static function __static() {
-    self::$display= [
-      'vert' => new VerticalDisplay(),
-      'csv'  => new CsvDisplay(';')
-    ];
-  }
 
   public function __construct(Connection $connection, array $statements) {
     $this->connection= $connection;
@@ -35,12 +27,9 @@ class Statements implements Command {
       }
 
       if (false === ($p= strrpos($sql, ';'))) {
-        $mode= 'vert';
+        $display= Display::named('vert');
       } else {
-        $mode= trim(strtr(strtolower(substr($sql, $p + 1)), ['-m' => ''])) ?: 'vert';
-        if (!isset(self::$display[$mode])) {
-          throw new IllegalArgumentException('No such display mode "'.$mode.'"');
-        }
+        $display= Display::named(trim(strtr(strtolower(substr($sql, $p + 1)), ['-m' => ''])) ?: 'vert');
         $sql= substr($sql, 0, $p);
       }
 
@@ -52,7 +41,7 @@ class Statements implements Command {
         } else {
           $rows= 0;
           while ($record= $q->next()) {
-            Console::writeLine(self::$display[$mode]->render($record));
+            Console::writeLine($display->render($record));
             $rows++;
           }
           Console::$err->writeLinef('%d row(s) in set (%.2f sec)', $rows, $timer->elapsedTime());

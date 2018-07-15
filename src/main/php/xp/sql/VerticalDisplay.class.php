@@ -11,7 +11,9 @@ use util\Objects;
  * last_login: 2017-05-30 11:16:00+0200
  * ```
  */
-class VerticalDisplay implements Display {
+class VerticalDisplay extends Display {
+
+  static function __static() { }
 
   /** Renders record */
   public function render(array $record): string {

@@ -25,6 +25,10 @@ use util\cmd\Console;
  *   ```sh
  *   $ xp sql dev-db 'select * from account where id = 1'
  *   ```
+ * - Open an interactive shell, adding readline support via `rlwrap`
+ *   ```sh
+ *   $ rlwrap xp sql dev-db
+ *   ```
  *
  * The file `connections.ini` is per-user and can be found in one of:
  *

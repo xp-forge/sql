@@ -3,6 +3,10 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+* Implemented interactive SQL shell. Type `xp sql [connection]` to launch
+  the shell. Run with `rlwrap` to add readline support
+  (@thekid)
+
 ## 0.3.0 / 2017-07-15
 
 * Added PHP 7.2 compatibility - @thekid

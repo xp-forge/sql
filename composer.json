@@ -7,7 +7,7 @@
   "keywords": ["module", "xp"],
   "require" : {
     "xp-framework/core": "^9.0 | ^8.0 | ^7.0",
-    "xp-framework/rdbms": "^10.0",
+    "xp-framework/rdbms": "^11.0 | ^10.0",
     "php" : ">=7.0.0"
   },
   "require-dev" : {

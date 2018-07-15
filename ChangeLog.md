@@ -3,6 +3,10 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+## 0.3.0 / 2017-07-15
+
+* Added PHP 7.2 compatibility - @thekid
+
 ## 0.2.0 / 2017-05-30
 
 * Added ability to use named connection from a per-user configuration

@@ -3,6 +3,9 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+## 0.4.0 / 2018-09-23
+
+* Added compatibility with xp-framework/rdbms 12.0.0 - @thekid
 * Implemented interactive SQL shell. Type `xp sql [connection]` to launch
   the shell. Run with `rlwrap` to add readline support
   (@thekid)

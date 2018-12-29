@@ -7,13 +7,13 @@ SQL Subcommand change log
 
 * Added compatibility with xp-framework/rdbms 12.0.0 - @thekid
 
-## 0.4.0 / 2018-06-15
+## 0.4.0 / 2018-07-15
 
 * Implemented interactive SQL shell. Type `xp sql [connection]` to launch
   the shell. Run with `rlwrap` to add readline support
   (@thekid)
 
-## 0.3.0 / 2017-07-15
+## 0.3.0 / 2018-07-15
 
 * Added PHP 7.2 compatibility - @thekid
 

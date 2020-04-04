@@ -3,6 +3,10 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+## 1.0.0 / 2020-04-04
+
+* Made compatible with XP 10 - @thekid
+
 ## 0.5.0 / 2018-09-23
 
 * Added compatibility with xp-framework/rdbms 12.0.0 - @thekid

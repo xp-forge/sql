@@ -1,5 +1,6 @@
 <?php namespace xp\sql\unittest;
 
+use unittest\Test;
 use xp\sql\VerticalDisplay;
 
 class VerticalDisplayTest extends \unittest\TestCase {
@@ -10,7 +11,7 @@ class VerticalDisplayTest extends \unittest\TestCase {
     $this->fixture= new VerticalDisplay();
   }
 
-  #[@test]
+  #[Test]
   public function record() {
     $this->assertEquals(
       "id: 1\n".

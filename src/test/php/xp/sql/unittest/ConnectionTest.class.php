@@ -1,7 +1,8 @@
 <?php namespace xp\sql\unittest;
 
-use xp\sql\{Connection, ConnectionTo, NamedConnection};
+use unittest\Test;
 use util\Properties;
+use xp\sql\{Connection, ConnectionTo, NamedConnection};
 
 class ConnectionTest extends \unittest\TestCase {
   private $prop;
@@ -11,12 +12,12 @@ class ConnectionTest extends \unittest\TestCase {
     $this->prop= new Properties();
   }
 
-  #[@test]
+  #[Test]
   public function to_dsn() {
     $this->assertInstanceOf(ConnectionTo::class, Connection::to('sqlite://./test.db', $this->prop));
   }
 
-  #[@test]
+  #[Test]
   public function to_named() {
     $this->assertInstanceOf(NamedConnection::class, Connection::to('dev-db', $this->prop));
   } 

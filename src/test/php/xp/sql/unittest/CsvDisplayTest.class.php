@@ -1,5 +1,6 @@
 <?php namespace xp\sql\unittest;
 
+use unittest\Test;
 use xp\sql\CsvDisplay;
 
 class CsvDisplayTest extends \unittest\TestCase {
@@ -10,7 +11,7 @@ class CsvDisplayTest extends \unittest\TestCase {
     $this->fixture= new CsvDisplay();
   }
 
-  #[@test]
+  #[Test]
   public function record() {
     $this->assertEquals(
       '1;"Test"',

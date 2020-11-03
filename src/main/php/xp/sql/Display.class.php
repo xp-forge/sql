@@ -1,5 +1,7 @@
 <?php namespace xp\sql;
 
+use lang\IllegalArgumentException;
+
 abstract class Display {
   private static $display;
 

@@ -3,6 +3,11 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+## 1.0.2 / 2020-11-03
+
+* Fixed issue #2: Class 'xp\sql\IllegalArgumentException' not found
+  (@thekid)
+
 ## 1.0.1 / 2020-04-10
 
 * Made compatible with `xp-framework/rdbms` 13.0.0 - @thekid

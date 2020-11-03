@@ -1,16 +1,14 @@
 <?php namespace xp\sql\unittest;
 
-use unittest\Assert;
-use unittest\Test;
+use unittest\{Assert, Before, Test};
 use util\Properties;
 use xp\sql\{Connection, ConnectionTo, NamedConnection};
 
 class ConnectionTest {
   private $prop;
 
-  /** @return void */
   #[Before]
-  public function setUp() {
+  public function prop() {
     $this->prop= new Properties();
   }
 

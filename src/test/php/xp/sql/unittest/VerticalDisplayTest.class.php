@@ -1,15 +1,13 @@
 <?php namespace xp\sql\unittest;
 
-use unittest\Assert;
-use unittest\Test;
+use unittest\{Assert, Before, Test};
 use xp\sql\VerticalDisplay;
 
 class VerticalDisplayTest {
   private $fixture;
 
-  /** @return void */
   #[Before]
-  public function setUp() {
+  public function fixture() {
     $this->fixture= new VerticalDisplay();
   }
 

@@ -1,15 +1,13 @@
 <?php namespace xp\sql\unittest;
 
-use unittest\Assert;
-use unittest\Test;
+use unittest\{Assert, Before, Test};
 use xp\sql\CsvDisplay;
 
 class CsvDisplayTest {
   private $fixture;
 
-  /** @return void */
   #[Before]
-  public function setUp() {
+  public function fixture() {
     $this->fixture= new CsvDisplay();
   }
 
@@ -19,5 +17,13 @@ class CsvDisplayTest {
       '1;"Test"',
       $this->fixture->render(['id' => 1, 'name' => 'Test'])
     );
-  } 
+  }
+
+  #[Test]
+  public function quoted() {
+    Assert::equals(
+      '1;"""Test"""',
+      $this->fixture->render(['id' => 1, 'name' => '"Test"'])
+    );
+  }
 }

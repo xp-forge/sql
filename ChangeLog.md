@@ -3,6 +3,8 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+* Made library compatible with XP 11 - @thekid
+
 ## 1.0.2 / 2020-11-03
 
 * Fixed issue #2: Class 'xp\sql\IllegalArgumentException' not found

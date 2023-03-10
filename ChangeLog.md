@@ -3,6 +3,8 @@ SQL Subcommand change log
 
 ## ?.?.? / ????-??-??
 
+* Merged PR #3: Migrate to new testing library - @thekid
+
 ## 1.0.3 / 2022-02-27
 
 * Made library compatible with XP 11 - @thekid

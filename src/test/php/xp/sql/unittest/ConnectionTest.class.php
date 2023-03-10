@@ -1,6 +1,6 @@
 <?php namespace xp\sql\unittest;
 
-use unittest\{Assert, Before, Test};
+use test\{Assert, Before, Test};
 use util\Properties;
 use xp\sql\{Connection, ConnectionTo, NamedConnection};
 
